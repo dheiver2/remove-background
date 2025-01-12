@@ -16,11 +16,11 @@ export async function POST(request: Request) {
     // Remove o fundo da imagem
     const outputImage = await BackgroundRemoval.removeBackground(inputImage);
 
-    return new NextResponse(outputImage, {
-      headers: {
-        'Content-Type': 'image/png',
-      },
-    });
+    // Converte a imagem processada para base64
+    const outputBuffer = await outputImage.arrayBuffer();
+    const base64Image = Buffer.from(outputBuffer).toString('base64');
+
+    return NextResponse.json({ image: base64Image });
   } catch (error) {
     console.error('Erro:', error);
     return NextResponse.json({ error: 'Ocorreu um erro ao processar a imagem' }, { status: 500 });

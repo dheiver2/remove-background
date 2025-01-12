@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-import { remove } from 'rembg-node';
-import { Readable } from 'stream';
-import { pipeline } from 'stream/promises';
+import { BackgroundRemoval } from '@imgly/background-removal';
 
 export async function POST(request: Request) {
   try {
@@ -13,9 +11,10 @@ export async function POST(request: Request) {
     }
 
     const buffer = await file.arrayBuffer();
-    const inputImage = Buffer.from(buffer);
+    const inputImage = new Blob([buffer], { type: file.type });
 
-    const outputImage = await remove(inputImage);
+    // Remove o fundo da imagem
+    const outputImage = await BackgroundRemoval.removeBackground(inputImage);
 
     return new NextResponse(outputImage, {
       headers: {

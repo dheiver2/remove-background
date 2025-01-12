@@ -29,9 +29,8 @@ export default function Home() {
         throw new Error('Erro ao processar a imagem');
       }
 
-      const blob = await response.blob();
-      const imageUrl = URL.createObjectURL(blob);
-      setProcessedImage(imageUrl);
+      const data = await response.json();
+      setProcessedImage(`data:image/png;base64,${data.image}`);
     } catch (error) {
       console.error('Erro:', error);
       alert('Ocorreu um erro ao processar a imagem.');

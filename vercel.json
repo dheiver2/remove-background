@@ -2,12 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/server.py",
-      "use": "@vercel/python"
+      "src": "package.json",
+      "use": "@vercel/next"
     },
     {
-      "src": "app/page.tsx",
-      "use": "@vercel/next"
+      "src": "backend/server.py",
+      "use": "@vercel/python"
     }
   ],
   "routes": [

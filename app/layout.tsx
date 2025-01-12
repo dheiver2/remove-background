@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'Uma ferramenta online para remover o fundo de imagens.',
 };
 
-// Layout principal
+// Layout raiz
 export default function RootLayout({
   children,
 }: {
